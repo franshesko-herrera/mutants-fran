@@ -18,7 +18,6 @@ public class DnaArrayServiceImpl implements DnaArrayService {
         validateDna(dna);
         dna.replaceAll(String::toUpperCase);
         char[][] matrix = buildMatrixFromStringArray(dna);
-        // printMatrix(matrix); // --> We can print the matrix in order to validate data
         int mutantChains = 0;
         for (String chain : MUTANT_CHAINS) {
             mutantChains += findChainInMatrix(chain, matrix);
@@ -30,7 +29,7 @@ public class DnaArrayServiceImpl implements DnaArrayService {
         return Boolean.FALSE;
     }
 
-    public void validateDna(ArrayList<String> dna) throws Exception {
+    private void validateDna(ArrayList<String> dna) throws Exception {
         if (!dna.stream()
                 .map(s -> s.length() == dna.size()
                         && s.length() >= 4
@@ -48,18 +47,6 @@ public class DnaArrayServiceImpl implements DnaArrayService {
         }
 
         return matrix;
-    }
-
-    private void printMatrix(char[][] matrix) {
-
-        System.out.println("*** ADN BASES ***");
-
-        for (char[] chars : matrix) {
-            for (char aChar : chars) {
-                System.out.print(" " + aChar + " ");
-            }
-            System.out.print("\r\n");
-        }
     }
 
     private int findChainInMatrix(String adnChain, char[][] matrix) {
